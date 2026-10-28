@@ -1,55 +1,55 @@
-const hash = await Bun.password.hash("senha", {
-    algorithm: "argon2id",
-    memoryCost: 16,
-    timeCost: 8
-}) 
+import login from "./public/login.html"
+import cadastro from "./public/cadastro.html"
+import db from "./db"
 
-const isMatch = await Bun.password.verify("senha", hash)
-
-
-import frontend from "./public/index.html"
-import { db } from "./db"
+const loggedUsers: any = {}
 
 const srv = Bun.serve({
     port: 1337,
     routes: {
-        "/": frontend,
+        "/": login,
+        "/cadastro": cadastro,
 
-        "/cookie-set": () => {
-            require.cookies.set("nome", "six the la seven")
-            return new Response("knjdbzfnmkj")
-        },
-        "/cookie-get": () => {
-            return a
-        },
-
-
-        "/user": {
-            GET: () => {
-                const query = db.query(`SELECT * FROM users`)
-                const data = query.all()
-                return Response.json(data)
-            },
-
+        "/users": {
             POST: async (req) => {
                 const body = await req.body?.json()
                 const query = db.query(`
                     INSERT INTO users(username, email, password_hash)
                     VALUES(:username, :email, :password_hash)
                 `)
-                const dbResp = query.run({
+                const hash = await Bun.password.hash(body.password)
+                const data = query.run({
                     ':username': body.username,
                     ':email': body.email,
-                    ':password_hash': body.password
+                    ':password_hash': hash
                 })
-                return Response.json({
-                    "message": "deu boa garote!",
-                    dbResp
-                })
+                return Response.json(data)
             },
         },
 
-        "/user/:id": {
+        "/login": {
+            POST: async (req) => {
+                const body = await req.body?.json()
+                const query = db.query(`SELECT * FROM users WHERE username=:username LIMIT 1`)
+                const data: any = query.get({ 
+                    ":username": body.username,
+                    ":email": body.email
+                })
+                if (!data)
+                    return Response.json({ msg: "usuário não encontrado" }, { status: 404 })
+                const hash = data.password_hash
+                const isMatch = await Bun.password.verify(body.password, hash)
+                if (!isMatch)
+                    return Response.json({ msg: "senha incorreta" }, { status: 401 })
+                const uuid = crypto.randomUUID()
+                delete data.password_hash
+                loggedUsers[uuid] = data
+                req.cookies.set("ses", uuid)
+                return Response.json(isMatch)
+            }
+        },
+
+        "/users/:id": {
             GET: (req) => {
                 const id = req.params.id
                 const query = db.query(`SELECT * FROM users WHERE id=:id`)

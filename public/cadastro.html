@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>TableMatch - Cadastro </title>
+</head>
+
+<body>
+
+    <h1>TableMatch</h1>
+
+    <h2>Cadastro</h2>
+
+    <form id="formCadastro">
+        <label for="username">Usuário:</label>
+        <input type="text" id="username" name="username">
+        <br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <br><br>
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password">
+        <br><br>
+        <button type="submit">Cadastrar</button>
+    </form>
+    <p>Já possui uma conta? <a href="/">Entrar</a></p>
+    <script>
+        const frmCadastro = document.querySelector('#formCadastro')
+
+        frmCadastro.addEventListener('submit', async (ev) => {
+            ev.preventDefault()
+            const response = await fetch("/users", {
+                method: "POST",
+                headers: { "Content-type": "application/json" },
+                body: JSON.stringify({
+                    "username": frmCadastro.username.value,
+                    "email": frmCadastro.email.value,
+                    "password": frmCadastro.password.value
+                })
+            })
+        })
+        
+    </script>
+</body>
+</html>

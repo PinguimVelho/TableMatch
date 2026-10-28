@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TableMatch - Login</title>
+</head>
+
+<body>
+    <h1>TableMatch</h1>
+
+    <h2>Login</h2>
+
+    <form id="formLogin">
+        <label for="username">Usuário:</label>
+        <input type="text" id="username" name="username">
+        <br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <br><br>
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password">
+        <br><br>    
+        <button type="submit">Entrar</button>
+    </form>
+
+    <p>Não possui uma conta? <a href="/cadastro">Cadastre-se</a></p>
+
+    <script>
+        const frmLogin = document.querySelector('formLogin')
+
+        frmLogin.addEventListener('submit', async (ev) => {
+            ev.preventDefault()
+            const response = await fetch("/login", {
+                method: "POST",
+                headers: { "Content-type": "application/json" },
+                body: JSON.stringify({
+                    "username": frmLogin.username.value,
+                    "email": frmLogin.email.value,
+                    "password": frmLogin.password.value
+                })
+            })
+            if (response.status == 404)
+                return alert("Usuário não encontrado")
+
+            if (response.status == 401)
+                return alert("Senha incorreta")
+
+            if (response.ok) {
+                window.location.href = "/home"
+                return
+            }
+            alert("Não deveria chegar aqui")
+        })
+    </script>
+</body>
+
+</html>
