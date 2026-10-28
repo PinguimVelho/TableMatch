@@ -1,3 +1,12 @@
+const hash = await Bun.password.hash("senha", {
+    algorithm: "argon2id",
+    memoryCost: 16,
+    timeCost: 8
+}) 
+
+const isMatch = await Bun.password.verify("senha", hash)
+
+
 import frontend from "./projeto/index.html"
 import { db } from "./db"
 
@@ -5,7 +14,16 @@ const srv = Bun.serve({
     port: 1337,
     routes: {
         "/": frontend,
-        
+
+        "/cookie-set": () => {
+            require.cookies.set("nome", "six the la seven")
+            return new Response("knjdbzfnmkj")
+        },
+        "/cookie-get": () => {
+            return a
+        },
+
+
         "/user": {
             GET: () => {
                 const query = db.query(`SELECT * FROM users`)
@@ -14,7 +32,7 @@ const srv = Bun.serve({
             },
 
             POST: async (req) => {
-                const body = await req.body.json()
+                const body = await req.body?.json()
                 const query = db.query(`
                     INSERT INTO users(username, email, password_hash)
                     VALUES(:username, :email, :password_hash)
@@ -40,7 +58,7 @@ const srv = Bun.serve({
             },
 
             PUT: async(req) => {
-                const body = await req.body.json()
+                const body = await req.body?.json()
                 const query = db.query(`
                     UPDATE users SET 
                     username = :username, 
@@ -70,7 +88,7 @@ const srv = Bun.serve({
                 return Response.json(data)
             },
             POST: async (req) => {
-                const body = await req.body.json()
+                const body = await req.body?.json()
                 const query = db.query(`
                     INSERT INTO mesas(nome, descricao, tematica, horario, plataformas, vagas)
                     VALUES(:nome, :descricao, :tematica, :horario, :plataformas, :vagas)
@@ -97,7 +115,7 @@ const srv = Bun.serve({
                 return Response.json(data)
             },
             PUT: async (req) => {
-                const body = await req.body.json()
+                const body = await req.body?.json()
                 const query = db.query(`
                     UPDATE mesas SET 
                         nome = :nome, 
