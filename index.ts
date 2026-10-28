@@ -7,7 +7,7 @@ const hash = await Bun.password.hash("senha", {
 const isMatch = await Bun.password.verify("senha", hash)
 
 
-import frontend from "./projeto/index.html"
+import frontend from "./public/index.html"
 import { db } from "./db"
 
 const srv = Bun.serve({
