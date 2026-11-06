@@ -2,14 +2,88 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <link rel="stylesheet" href="./css/home.css">
+    <title>TableMatch - Home</title>
 </head>
 <body>
-    <h1>Home</h1>
-    <div class="profile">
-        <img src="" alt="" class="thumb">
-        <div class="username">...</div>
-    </div>
+    <main class="container">
+
+        <!-- Cabeçalho -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🎲</span>
+                <h1>TableMatch</h1>
+            </div>
+
+            <div class="header-icons">
+                <button class="profile">●</button>
+                <button class="menu">☰</button>
+            </div>
+        </header>
+
+        <!-- Área principal -->
+        <section class="cards-container">
+
+            <article class="game-card">
+
+                <div class="game-image">
+                    <div class="image-title">
+                        <span>O SOM DAS SEIS</span>
+                    </div>
+                </div>
+
+                <div class="game-content">
+
+                    <h2>Sangue e Poeira RPG</h2>
+
+                    <div class="game-info">
+
+                        <p>
+                            <span class="info-icon">◷</span>
+                            Sábados · 19:00–21:00
+                        </p>
+
+                        <p>
+                            <span class="info-icon">♟</span>
+                            16–20 anos
+                        </p>
+
+                        <p>
+                            <span class="info-icon">🎲</span>
+                            Sistema: O Som das Seis
+                        </p>
+
+                        <p>
+                            <span class="info-icon">☏</span>
+                            Plataforma: Discord + Owlbear
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+        <!-- Botões de interação -->
+        <section class="actions">
+
+            <button class="action-button reject" title="Não gostei">
+                ✕
+            </button>
+
+            <button class="action-button favorite" title="Favoritar">
+                ★
+            </button>
+
+            <button class="action-button like" title="Gostei">
+                ♥
+            </button>
+
+        </section>
+
+    </main>
     <script>
         async function init() {
             const response = await fetch("/login/user")
@@ -19,7 +93,6 @@
                 return
             }
             const data = await response.json()
-            document.querySelector(".profile .username").textContent = data.username
         }
         init()
     </script>

@@ -1,0 +1,424 @@
+
+/* Configurações gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(
+        180deg,
+        #475675 0%,
+        #292638 45%,
+        #000000 100%
+    );
+    color: white;
+    min-height: 100vh;
+}
+
+/* Container principal */
+.container {
+    width: 100%;
+    max-width: 600px;
+    min-height: 100vh;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Cabeçalho */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-icon {
+    font-size: 48px;
+}
+
+.logo h1 {
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: -2px;
+    color: black;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-icons button {
+    background: none;
+    border: none;
+    color: black;
+    cursor: pointer;
+}
+
+.profile {
+    width: 55px;
+    height: 55px;
+    border: 2px solid black !important;
+    border-radius: 50%;
+    font-size: 35px;
+}
+
+.menu {
+    font-size: 42px;
+}
+
+/* Card da campanha */
+.cards-container {
+    width: 100%;
+}
+
+.game-card {
+    width: 100%;
+    position: relative;
+    border-radius: 30px;
+    overflow: hidden;
+    background: #171717;
+    min-height: 720px;
+}
+
+/* Imagem da campanha */
+.game-image {
+    height: 540px;
+    width: 100%;
+
+    background-image:
+        linear-gradient(
+            to bottom,
+            transparent 55%,
+            rgba(0,0,0,0.85) 100%
+        ),
+        url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee");
+
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+/* Título sobre a imagem */
+.image-title {
+    position: absolute;
+    bottom: 25px;
+    width: 100%;
+    text-align: center;
+}
+
+.image-title span {
+    font-family: Georgia, serif;
+    font-size: 42px;
+    font-weight: bold;
+    color: #eeeeee;
+    text-shadow: 3px 3px 5px black;
+}
+
+/* Conteúdo do card */
+.game-content {
+    position: relative;
+    margin-top: -40px;
+    padding: 20px 15px 25px;
+    z-index: 2;
+}
+
+.game-content h2 {
+    font-size: 32px;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+/* Informações */
+.game-info {
+    background: rgba(55, 55, 55, 0.94);
+    padding: 16px;
+    border-radius: 18px;
+}
+
+.game-info p {
+    font-size: 18px;
+    color: #eeeeee;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-icon {
+    font-size: 23px;
+    min-width: 25px;
+}
+
+/* Botões */
+.actions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 25px;
+    padding-bottom: 20px;
+}
+
+.action-button {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+
+/* Rejeitar */
+.reject {
+    background: #48476e;
+    color: #d00018;
+}
+
+/* Favoritar */
+.favorite {
+    width: 68px;
+    height: 68px;
+    background: #292929;
+    color: #ffce38;
+    font-size: 48px;
+}
+
+/* Curtir */
+.like {
+    background: #48476e;
+    color: #c90018;
+}
+
+/* Efeito ao passar o mouse */
+.action-button:hover {
+    transform: scale(1.12);
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+
+    .container {
+        padding: 15px 20px;
+    }
+
+    .logo h1 {
+        font-size: 25px;
+    }
+
+    .game-card {
+        min-height: 690px;
+    }
+
+    .game-image {
+        height: 500px;
+    }
+
+    .game-content h2 {
+        font-size: 27px;
+    }
+
+    .game-info p {
+        font-size: 16px;
+    }
+
+    .action-button {
+        width: 75px;
+        height: 75px;
+        font-size: 48px;
+    }
+
+    .favorite {
+        width: 62px;
+        height: 62px;
+        font-size: 40px;
+    }
+}
+
+
+/* ===========================
+   VERSÃO DESKTOP - TABLEMATCH
+   =========================== */
+
+@media (min-width: 768px) {
+
+    body {
+        min-height: 100vh;
+        background: linear-gradient(
+            135deg,
+            #475675,
+            #30283f,
+            #090909
+        );
+    }
+
+    .container {
+        max-width: 1150px;
+        padding: 30px 40px;
+    }
+
+    /* Cabeçalho */
+
+    .header {
+        margin-bottom: 35px;
+    }
+
+    .logo-icon {
+        font-size: 55px;
+    }
+
+    .logo h1 {
+        font-size: 36px;
+    }
+
+    .profile {
+        width: 60px;
+        height: 60px;
+    }
+
+    .menu {
+        font-size: 45px;
+    }
+
+    /* Card principal */
+
+    .cards-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .game-card {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+
+        width: 100%;
+        max-width: 1050px;
+
+        min-height: 520px;
+
+        border-radius: 25px;
+        overflow: hidden;
+
+        background: #171717;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    }
+
+    /* Imagem à esquerda */
+
+    .game-image {
+        width: 100%;
+        height: 100%;
+        min-height: 520px;
+
+        background-position: center;
+        background-size: cover;
+    }
+
+    .image-title span {
+        font-size: 40px;
+    }
+
+    /* Informações à direita */
+
+    .game-content {
+        margin-top: 0;
+
+        padding: 45px 35px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        background: #171717;
+    }
+
+    .game-content h2 {
+        font-size: 35px;
+        margin-bottom: 25px;
+    }
+
+    .game-info {
+        padding: 25px;
+        border-radius: 15px;
+    }
+
+    .game-info p {
+        font-size: 18px;
+        margin: 15px 0;
+    }
+
+    .info-icon {
+        font-size: 25px;
+    }
+
+    /* Botões de interação */
+
+    .actions {
+        max-width: 600px;
+        margin: 35px auto 0;
+
+        justify-content: center;
+        gap: 65px;
+    }
+
+    .action-button {
+        width: 85px;
+        height: 85px;
+        font-size: 55px;
+    }
+
+    .favorite {
+        width: 70px;
+        height: 70px;
+    }
+
+    .action-button:hover {
+        transform: scale(1.15);
+        filter: brightness(1.2);
+    }
+
+}
+
+/* Telas grandes */
+
+@media (min-width: 1200px) {
+
+    .container {
+        max-width: 1300px;
+    }
+
+    .game-card {
+        max-width: 1100px;
+        min-height: 580px;
+    }
+
+    .game-image {
+        min-height: 580px;
+    }
+
+    .game-content {
+        padding: 55px;
+    }
+
+    .game-content h2 {
+        font-size: 40px;
+    }
+
+    .game-info p {
+        font-size: 20px;
+    }
+
+}
